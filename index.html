@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh‑CN">
+<head>
+    <meta charset="UTF‑8">
+    <meta name="viewport" content="width=device‑width, initial‑scale=1.0">
+    <title>李宇轩的个人主页</title>
+    <style>
+        * {box-sizing: border-box;margin:0;padding:0;}
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: system‑ui,‑apple‑system,Segoe UI,Roboto,sans‑serif;
+            max-width:800px;
+            margin:0 auto;
+            padding:40px 20px;
+            background:#121417;
+            color:#e8e8e8;
+            line-height:1.65;
+            position: relative;
+        }
+        body::before{
+            content:"";
+            position: fixed;
+            top:0;left:0;
+            width:100%;height:100%;
+            background: radial-gradient(circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(88,166,255,0.08), transparent 60%);
+            pointer-events:none;
+            z-index:-1;
+        }
+        h1 {
+            font-size:2.2rem;
+            margin-bottom:8px;
+            color:#58a6ff;
+        }
+        .cursor{
+            display:inline-block;
+            width:10px;
+            background:#58a6ff;
+            margin-left:4px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink{
+            0%,49%{opacity:1;}
+            50%,100%{opacity:0;}
+        }
+        h2 {
+            margin:36px 0 12px 0;
+            color:#79c0ff;
+            border-bottom:1px solid #2b3139;
+            padding-bottom:6px;
+        }
+        .desc {color:#adbac7;font-size:1.05rem;margin-bottom:24px;}
+        .time-text {
+            color:#8ddb8c;
+            margin-bottom:20px;
+            font-family:Consolas,monospace;
+        }
+        ul {padding-left:22px;margin-bottom:16px;}
+        .card {
+            background:#1c2128;
+            border-radius:8px;
+            padding:16px 20px;
+            margin:12px 0;
+            border:1px solid #2d333b;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(88,166,255,0.15);
+            border-color:#58a6ff;
+        }
+        .card h3 {color:#8ddb8c;margin-bottom:6px;}
+        a {
+            color:#58a6ff;
+            text-decoration:none;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color:#83c9ff;
+            text-decoration:underline;
+        }
+        .footer {margin-top:60px;color:#768390;font-size:0.9rem;}
+    </style>
+</head>
+<body>
+    <h1>李宇轩<span class="cursor"></span></h1>
+    <p class="desc">学生</p>
+    <div class="time-text">当前本地时间：<span id="clock"></span></div>
+
+    <h2>关于我</h2>
+    <p>这是我的个人网站，我在班上成绩长期保持第一名，YMO五年级获得全国金奖</p>
+
+    <h2>我会做什么</h2>
+    <ul>
+        <li>计算机研究，搭建个人网站</li>
+        <li>SSD/U盘制作</li>
+        <li>研究数学（初联学习中）</li>
+        <li>其他</li>
+    </ul>
+
+    <h2>项目</h2>
+    <div class="card">
+        <h3>项目一：计算机研究，搭建个人网站</h3>
+        <p>就是这个网站</p>
+        <p><a href="https://github.com/liyuxuan2014/liyuxuan2014.github.io">GitHub仓库</a></p>
+    </div>
+    <div class="card">
+        <h3>项目二：SSD/U盘制作</h3>
+        <p>闪存颗粒、主控开卡调试，硬件DIY实验。</p>
+    </div>
+
+    <div class="footer" id="copyright"></div>
+
+<script>
+document.addEventListener('mousemove',e=>{
+    document.body.style.setProperty('--mouse-x',e.clientX+'px');
+    document.body.style.setProperty('--mouse-y',e.clientY+'px');
+})
+function updateClock(){
+    const now=new Date();
+    const y=now.getFullYear();
+    const m=String(now.getMonth()+1).padStart(2,'0');
+    const d=String(now.getDate()).padStart(2,'0');
+    const h=String(now.getHours()).padStart(2,'0');
+    const mi=String(now.getMinutes()).padStart(2,'0');
+    const s=String(now.getSeconds()).padStart(2,'0');
+    document.getElementById("clock").innerText=`${y}-${m}-${d} ${h}:${mi}:${s}`;
+}
+updateClock();
+setInterval(updateClock,1000);
+
+const buildYear=2026;
+const currentYear=new Date().getFullYear();
+let copyrightText;
+if(currentYear>buildYear){
+    copyrightText=`© ${buildYear}‑${currentYear}｜使用HTML构建，托管于GitHub Pages`;
+}else{
+    copyrightText=`© ${buildYear}｜使用HTML构建，托管于GitHub Pages`;
+}
+document.getElementById("copyright").innerText=copyrightText;
+</script>
+</body>
+</html>
